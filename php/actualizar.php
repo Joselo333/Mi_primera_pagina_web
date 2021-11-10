@@ -4,7 +4,7 @@
 
     $id=$_GET['id'];
 
-    $sql="SELECT * FROM registro WHERE rut='$id'";
+    $sql="SELECT nombres,apellidos,rut,direccion,fecha_nac,sexo FROM registro WHERE id='$id'";
     $query=mysqli_query($con,$sql);
 
 ?>
@@ -62,9 +62,12 @@
             </div>
 
             <div class="row mt-5"> 
-                        
-                <div class="col-12 text-center">
+                <div class="col-2"></div>
+                <div class="col-8 text-center">
                     <h1 class="h3 mb-3">Actualice datos</h1>
+                    <?php 
+                        while($row=mysqli_fetch_array($query)){
+                    ?>
                     <form action="update.php" method="POST">
 
                         <div class="input-group mb-3">
@@ -73,8 +76,8 @@
                               <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
                             </svg>
                           </span>
-                          <input type="text" name="nombres" aria-label="nombres" id="nombres" class="form-control" placeholder="Nombres">
-                          <input type="text" name="apellidos" aria-label="apellidos" id="apellidos" class="form-control" placeholder="Apellidos">
+                          <input type="text" name="nombres" aria-label="nombres" id="nombres" class="form-control" placeholder="Nombres" value="<?php  echo $row['nombres']?>">
+                          <input type="text" name="apellidos" aria-label="apellidos" id="apellidos" class="form-control" placeholder="Apellidos" value="<?php  echo $row['apellidos']?>">
                         </div>
 
                         <div class="input-group mb-3">
@@ -84,7 +87,7 @@
                                 <path d="M4.5 0A2.5 2.5 0 0 0 2 2.5V14a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2.5A2.5 2.5 0 0 0 11.5 0h-7zM3 2.5A1.5 1.5 0 0 1 4.5 1h7A1.5 1.5 0 0 1 13 2.5v10.795a4.2 4.2 0 0 0-.776-.492C11.392 12.387 10.063 12 8 12s-3.392.387-4.224.803a4.2 4.2 0 0 0-.776.492V2.5z"/>
                               </svg>
                             </span>
-                            <input type="text" class="input-rut form-control" name="rut" id="rut" placeholder="12.345.678-9" required>
+                            <input type="text" class="input-rut form-control" name="rut" id="rut" placeholder="12.345.678-9" value="<?php  echo $row['rut']?>" required>
                         </div>
 
                         <div class="input-group mb-3">
@@ -93,7 +96,7 @@
                                     <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z"/>
                                 </svg>
                             </span>
-                            <input type="text" class="form-control" name="direccion" id="direccion" placeholder="Calle #1234" required>
+                            <input type="text" class="form-control" name="direccion" id="direccion" placeholder="Calle #1234" value="<?php  echo $row['direccion']?>" required>
                         </div>
 
                         <div class="input-group mb-3">
@@ -102,25 +105,25 @@
                                   <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V5h16V4H0V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5z"/>
                                 </svg> 
                             </span>
-                            <input class="form-control" id="date" format="yyyy-mm-dd" name="fecha_nac" type="date"  onchange="obtenerFecha(this)" placeholder="yyyy-mm-dd">
+                            <input class="form-control" id="date" format="yyyy-mm-dd" name="fecha_nac" type="date"  onchange="obtenerFecha(this)" placeholder="yyyy-mm-dd" value="<?php  echo $row['fecha']?>">
                         </div>
 
                         <div class="input-group mb-3">
-                            <select class="form-select" name="sexo" id="state" required="">
+                            <select class="form-select" name="sexo" id="state" value="<?php  echo $row['sexo']?>" required>
                                 <option value="">Seleccione Genero</option>
-                                <option>Masculino</option>
-                                <option>Femenino</option>
-                                <option>Otro</option>
+                                <option id="0">Masculino</option>
+                                <option id="1">Femenino</option>
+                                <option id="2">Otro</option>
                             </select>
                         </div>
                         
-                        <div class="input-group mb-3">
-                            <input type="number" class="form-control" name="edad" min = "1" max = "100" placeholder="Edad">
-                        </div>
                         <input type="submit" class="btn btn-primary" value="Actualizar"> 
                     </form>
+                    <?php
+                        }
+                    ?>
                 </div>
-
+                <div class="col-2"></div>
             </div> 
             
             <div class="row">

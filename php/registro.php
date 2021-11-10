@@ -1,13 +1,12 @@
 <?php 
     include("conexion.php");
     $con=conectar();
-
-    $sql="SELECT *  FROM registro";
+    $sql="SELECT id,nombres,apellidos,rut,direccion,DATE_FORMAT(fecha_nac, '%d-%m-%Y')  as 'fecha',sexo,extract(year from(current_date))-extract(year from(fecha_nac)) as 'edad'  FROM registro";
     $query=mysqli_query($con,$sql);
     
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="e">
     <head>
         <title>Sushi Kiru</title>
         <meta charset="UTF-8">
@@ -85,11 +84,11 @@
                                 <td><?php  echo $row['apellidos']?></td>
                                 <td><?php  echo $row['rut']?></td>
                                 <td><?php  echo $row['direccion']?></td>    
-                                <td><?php  echo $row['fecha_nac']?></td>
+                                <td><?php  echo $row['fecha']?></td>
                                 <td><?php  echo $row['sexo']?></td>
                                 <td><?php  echo $row['edad']?></td>  
-                                <td><a href="actualizar.php?id=<?php echo $row['rut'] ?>" class="btn btn-info">Editar</a></td>
-                                <td><a href="delete.php?id=<?php echo $row['rut'] ?>" class="btn btn-danger">Eliminar</a></td>                                 
+                                <td><a href="actualizar.php?id=<?php echo $row['id'] ?>" class="btn btn-info">Editar</a></td>
+                                <td><a href="delete.php?id=<?php echo $row['id'] ?>" class="btn btn-danger">Eliminar</a></td>                                 
                             </tr>
                             <?php 
                                 }
