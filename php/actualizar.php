@@ -2,18 +2,21 @@
     include("conexion.php");
     $con=conectar();
 
-    $sql="SELECT *  FROM registro";
+    $id=$_GET['id'];
+
+    $sql="SELECT * FROM registro WHERE rut='$id'";
     $query=mysqli_query($con,$sql);
-    
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <title>Sushi Kiru</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="css/home.css" rel="stylesheet">
-        <link rel="shortcut icon" href="img/icono_kirusushi.png">
+        <link href="../css/home.css" rel="stylesheet">
+        <link rel="shortcut icon" href="../img/icono_kirusushi.png">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
         <script>
             function obtenerFecha(e)
@@ -33,17 +36,17 @@
                 <div class="col-12">
                 <nav class="navbar navbar-expand-lg bg-translucent">
                     <div class="container-fluid">
-                    <a class="navbar-brand link-dark" href="/"><img src="img/icono_kirusushi.png" width="30px" height="29px" alt="icono negocio"> Kiru Sushi</a>
+                    <a class="navbar-brand link-dark" href="/"><img src="../img/icono_kirusushi.png" width="30px" height="29px" alt="icono negocio"> Kiru Sushi</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                         <div class="navbar-nav">
-                        <a class="nav-link link-dark" aria-current="page" href="index.html">Inicio</a>
-                        <a class="nav-link link-dark" href="nosotros.html">Nosotros</a>
-                        <a class="nav-link link-dark" href="login.html">Login</a>
+                        <a class="nav-link link-dark" aria-current="page" href="../index.html">Inicio</a>
+                        <a class="nav-link link-dark" href="../nosotros.html">Nosotros</a>
+                        <a class="nav-link link-dark" href="../login.html">Login</a>
                         <a class="nav-link link-dark" href="https://drive.google.com/file/d/1IklU-lD9451JQJii3HnqoXgI6VkaNKMZ/view" target="_blank">Carta</a>
-                        <a class="nav-link link-dark" href="form_ext.html">Haz tu Pedido!</a>
+                        <a class="nav-link link-dark" href="../form_ext.html">Haz tu Pedido!</a>
                         <a class="nav-link link-dark" href="registro.php">Ver Registrados</a>
                         </div>
                     </div>
@@ -54,49 +57,70 @@
 
             <div class="row banner">
                 <div class="col-12 text-center">
-                    <img src="img/KIRU SUSHI.png" class="img-fluid banner" alt="...">
+                    <img src="../img/KIRU SUSHI.png" class="img-fluid banner" alt="...">
                 </div>
             </div>
 
             <div class="row mt-5"> 
-                <div class="col-12 ">
-                    <table class="table" >
-                        <thead class="table-dark table-striped border border-dark border-5" >
-                            <tr>
-                                <th>Nombres</th>
-                                <th>Apellidos</th>
-                                <th>RUT</th>
-                                <th>Direccion</th>
-                                <th>Fecha de Nacimiento</th>
-                                <th>Genero</th>
-                                <th>Edad</th>
-                                <th></th>
-                                <th></th>
-                                            
-                            </tr>
-                        </thead>
+                        
+                <div class="col-12 text-center">
+                    <h1 class="h3 mb-3">Actualice datos</h1>
+                    <form action="update.php" method="POST">
 
-                        <tbody class="border border-dark border-5">
-                            <?php
-                                while($row=mysqli_fetch_array($query)){
-                            ?>
-                            <tr>
-                                <td><?php  echo $row['nombres']?></td>
-                                <td><?php  echo $row['apellidos']?></td>
-                                <td><?php  echo $row['rut']?></td>
-                                <td><?php  echo $row['direccion']?></td>    
-                                <td><?php  echo $row['fecha_nac']?></td>
-                                <td><?php  echo $row['sexo']?></td>
-                                <td><?php  echo $row['edad']?></td>  
-                                <td><a href="actualizar.php?id=<?php echo $row['rut'] ?>" class="btn btn-info">Editar</a></td>
-                                <td><a href="delete.php?id=<?php echo $row['rut'] ?>" class="btn btn-danger">Eliminar</a></td>                                 
-                            </tr>
-                            <?php 
-                                }
-                            ?>
-                        </tbody>
-                    </table>
+                        <div class="input-group mb-3">
+                          <span class="input-group-text">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                              <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                            </svg>
+                          </span>
+                          <input type="text" name="nombres" aria-label="nombres" id="nombres" class="form-control" placeholder="Nombres">
+                          <input type="text" name="apellidos" aria-label="apellidos" id="apellidos" class="form-control" placeholder="Apellidos">
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-badge" viewBox="0 0 16 16">
+                                <path d="M6.5 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3zM11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                <path d="M4.5 0A2.5 2.5 0 0 0 2 2.5V14a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2.5A2.5 2.5 0 0 0 11.5 0h-7zM3 2.5A1.5 1.5 0 0 1 4.5 1h7A1.5 1.5 0 0 1 13 2.5v10.795a4.2 4.2 0 0 0-.776-.492C11.392 12.387 10.063 12 8 12s-3.392.387-4.224.803a4.2 4.2 0 0 0-.776.492V2.5z"/>
+                              </svg>
+                            </span>
+                            <input type="text" class="input-rut form-control" name="rut" id="rut" placeholder="12.345.678-9" required>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16">
+                                    <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z"/>
+                                </svg>
+                            </span>
+                            <input type="text" class="form-control" name="direccion" id="direccion" placeholder="Calle #1234" required>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-fill" viewBox="0 0 16 16">
+                                  <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V5h16V4H0V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5z"/>
+                                </svg> 
+                            </span>
+                            <input class="form-control" id="date" format="yyyy-mm-dd" name="fecha_nac" type="date"  onchange="obtenerFecha(this)" placeholder="yyyy-mm-dd">
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <select class="form-select" name="sexo" id="state" required="">
+                                <option value="">Seleccione Genero</option>
+                                <option>Masculino</option>
+                                <option>Femenino</option>
+                                <option>Otro</option>
+                            </select>
+                        </div>
+                        
+                        <div class="input-group mb-3">
+                            <input type="number" class="form-control" name="edad" min = "1" max = "100" placeholder="Edad">
+                        </div>
+                        <input type="submit" class="btn btn-primary" value="Actualizar"> 
+                    </form>
                 </div>
+
             </div> 
             
             <div class="row">
