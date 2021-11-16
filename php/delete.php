@@ -3,9 +3,9 @@
     include("conexion.php");
     $con=conectar();
 
-    $rut=$_GET['id'];
+    $id=$_GET['id'];
 
-    $sql="DELETE FROM registro  WHERE rut='$rut'";
+    $sql="DELETE FROM registro  WHERE id='$id'";
     $query=mysqli_query($con,$sql);
 
         if($query){

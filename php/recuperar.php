@@ -1,9 +1,8 @@
-<?php 
-    include("conexion.php");
-    $con=conectar();
-    $sql="SELECT id,nombres,apellidos,rut,direccion,DATE_FORMAT(fecha_nac, '%d-%m-%Y')  as 'fecha',sexo,extract(year from(current_date))-extract(year from(fecha_nac)) as 'edad', email FROM registro";
-    $query=mysqli_query($con,$sql);
+<?php
     
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -57,69 +56,8 @@
                 </div>
             </div>
 
-            <div class="row mt-5">
-                <div class="col-12">
-                    <table class="table text-center" >
-                        <thead class="table-dark table-striped border border-dark border-5" >
-                            <tr class="text-center">
-                                <th>Nombres</th>
-                                <th>Apellidos</th>
-                                <th>RUT</th>
-                                <th>Direccion</th>
-                                <th>Fecha de Nacimiento</th>
-                                <th>Genero</th>
-                                <th>Edad</th>
-                                <th>Email</th>
-                                <th></th>
-                                <th></th>
-                                            
-                            </tr>
-                        </thead>
-
-                        <tbody class="border border-dark border-5">
-                            <?php
-                                while($row=mysqli_fetch_array($query)){
-                            ?>
-                            <tr>
-                                <td><?php  echo $row['nombres']?></td>
-                                <td><?php  echo $row['apellidos']?></td>
-                                <td><?php  echo $row['rut']?></td>
-                                <td><?php  echo $row['direccion']?></td>    
-                                <td><?php  echo $row['fecha']?></td>
-                                <td><?php  echo $row['sexo']?></td> 
-                                <td><?php  echo $row['edad']?></td>
-                                <td><?php  echo $row['email']?></td>  
-                                <td><a href="actualizar.php?id=<?php echo $row['id'] ?>" class="btn btn-info">Editar</a></td>
-                                <td>
-                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                                        Eliminar
-                                    </button>
-                                </td>
-
-                                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="staticBackdropLabel">¿Seguro que desea eliminar usuario?</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            Se eliminaran todos los datos de este usuario.
-                                        </div>
-                                        <div class="modal-footer">
-                                            <a href="delete.php?id=<?php echo $row['id'] ?>"><button type="button" class="btn btn-secondary">Si</button></a>
-                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">No</button>
-                                        </div>
-                                        </div>
-                                    </div>
-                                    </div>                                 
-                            </tr>
-                            <?php 
-                                }
-                            ?>
-                        </tbody>
-                    </table>
-                </div>
+            <div class="row mt-5"> 
+                
             </div> 
             
             <div class="row">

@@ -4,7 +4,7 @@
 
     $id=$_GET['id'];
 
-    $sql="SELECT nombres,apellidos,rut,direccion,fecha_nac,sexo FROM registro WHERE id='$id'";
+    $sql="SELECT id,nombres,apellidos,rut,direccion,fecha_nac,sexo,email FROM registro WHERE id='$id'";
     $query=mysqli_query($con,$sql);
 
 ?>
@@ -45,9 +45,9 @@
                         <a class="nav-link link-dark" aria-current="page" href="../index.html">Inicio</a>
                         <a class="nav-link link-dark" href="../nosotros.html">Nosotros</a>
                         <a class="nav-link link-dark" href="../login.html">Login</a>
-                        <a class="nav-link link-dark" href="https://drive.google.com/file/d/1IklU-lD9451JQJii3HnqoXgI6VkaNKMZ/view" target="_blank">Carta</a>
                         <a class="nav-link link-dark" href="../form_ext.html">Haz tu Pedido!</a>
                         <a class="nav-link link-dark" href="registro.php">Ver Registrados</a>
+                        <a class="nav-link link-dark" href="https://drive.google.com/file/d/1IklU-lD9451JQJii3HnqoXgI6VkaNKMZ/view" target="_blank">Carta</a>
                         </div>
                     </div>
                     </div>
@@ -62,68 +62,80 @@
             </div>
 
             <div class="row mt-5"> 
-                <div class="col-2"></div>
-                <div class="col-8 text-center">
+                <div class="col-4"></div>
+                <div class="col-4 text-center">
                     <h1 class="h3 mb-3">Actualice datos</h1>
                     <?php 
                         while($row=mysqli_fetch_array($query)){
                     ?>
                     <form action="update.php" method="POST">
-
+                        <input type="hidden" value="<?php  echo $row['id']?>" name="id">
                         <div class="input-group mb-3">
-                          <span class="input-group-text">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
-                              <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                            </svg>
-                          </span>
-                          <input type="text" name="nombres" aria-label="nombres" id="nombres" class="form-control" placeholder="Nombres" value="<?php  echo $row['nombres']?>">
-                          <input type="text" name="apellidos" aria-label="apellidos" id="apellidos" class="form-control" placeholder="Apellidos" value="<?php  echo $row['apellidos']?>">
-                        </div>
-
-                        <div class="input-group mb-3">
-                            <span class="input-group-text">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-badge" viewBox="0 0 16 16">
-                                <path d="M6.5 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3zM11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                                <path d="M4.5 0A2.5 2.5 0 0 0 2 2.5V14a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2.5A2.5 2.5 0 0 0 11.5 0h-7zM3 2.5A1.5 1.5 0 0 1 4.5 1h7A1.5 1.5 0 0 1 13 2.5v10.795a4.2 4.2 0 0 0-.776-.492C11.392 12.387 10.063 12 8 12s-3.392.387-4.224.803a4.2 4.2 0 0 0-.776.492V2.5z"/>
-                              </svg>
-                            </span>
-                            <input type="text" class="input-rut form-control" name="rut" id="rut" placeholder="12.345.678-9" value="<?php  echo $row['rut']?>" required>
-                        </div>
-
-                        <div class="input-group mb-3">
-                            <span class="input-group-text">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16">
-                                    <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z"/>
-                                </svg>
-                            </span>
-                            <input type="text" class="form-control" name="direccion" id="direccion" placeholder="Calle #1234" value="<?php  echo $row['direccion']?>" required>
-                        </div>
-
-                        <div class="input-group mb-3">
-                            <span class="input-group-text">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-fill" viewBox="0 0 16 16">
-                                  <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V5h16V4H0V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5z"/>
-                                </svg> 
-                            </span>
-                            <input class="form-control" id="date" format="yyyy-mm-dd" name="fecha_nac" type="date"  onchange="obtenerFecha(this)" placeholder="yyyy-mm-dd" value="<?php  echo $row['fecha']?>">
-                        </div>
-
-                        <div class="input-group mb-3">
-                            <select class="form-select" name="sexo" id="state" value="<?php  echo $row['sexo']?>" required>
-                                <option value="">Seleccione Genero</option>
-                                <option id="0">Masculino</option>
-                                <option id="1">Femenino</option>
-                                <option id="2">Otro</option>
-                            </select>
-                        </div>
-                        
+                        <span class="input-group-text">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                          </svg>
+                        </span>
+                        <input type="text" name="nombres" id="nombres" class="form-control" placeholder="Nombres" value="<?php  echo $row['nombres']?>">
+                        <input type="text" name="apellidos" id="apellidos" class="form-control" placeholder="Apellidos"  value="<?php  echo $row['apellidos']?>">
+                      </div>
+      
+                      <div class="input-group mb-3">
+                        <span class="input-group-text">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-badge" viewBox="0 0 16 16">
+                            <path d="M6.5 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3zM11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                            <path d="M4.5 0A2.5 2.5 0 0 0 2 2.5V14a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2.5A2.5 2.5 0 0 0 11.5 0h-7zM3 2.5A1.5 1.5 0 0 1 4.5 1h7A1.5 1.5 0 0 1 13 2.5v10.795a4.2 4.2 0 0 0-.776-.492C11.392 12.387 10.063 12 8 12s-3.392.387-4.224.803a4.2 4.2 0 0 0-.776.492V2.5z"/>
+                          </svg>
+                        </span>
+                        <input type="text" class="input-rut form-control" name="rut" id="rut" placeholder="12.345.678-9" value="<?php  echo $row['rut']?>" required>
+                      </div>
+      
+                      <div class="input-group mb-3">
+                        <span class="input-group-text">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16">
+                            <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z"/>
+                          </svg>
+                        </span>
+                        <input type="text" class="form-control" name="direccion" id="direccion" placeholder="Calle #1234"  value="<?php  echo $row['direccion']?>" required>
+                      </div>
+      
+                      <div class="input-group mb-3">
+                        <span class="input-group-text">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-fill" viewBox="0 0 16 16">
+                            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V5h16V4H0V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5z"/>
+                          </svg> 
+                        </span>
+                        <input class="form-control" id="date" format="yyyy-mm-dd" name="fecha_nac" type="date"  onchange="obtenerFecha(this)" placeholder="yyyy-mm-dd">
+                      </div>
+      
+                      <div class="input-group mb-3">
+                        <span class="input-group-text">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                          </svg>
+                        </span>
+                        <select class="form-select" name="sexo" id="state" required="">
+                          <option selected="true"><?php  echo $row['sexo']?></option>
+                          <option>Masculino</option>
+                          <option>Femenino</option>
+                          <option>Otro</option>
+                        </select>
+                      </div>
+                      <div class="input-group mb-3">
+                        <span class="input-group-text">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-at" viewBox="0 0 16 16">
+                            <path d="M13.106 7.222c0-2.967-2.249-5.032-5.482-5.032-3.35 0-5.646 2.318-5.646 5.702 0 3.493 2.235 5.708 5.762 5.708.862 0 1.689-.123 2.304-.335v-.862c-.43.199-1.354.328-2.29.328-2.926 0-4.813-1.88-4.813-4.798 0-2.844 1.921-4.881 4.594-4.881 2.735 0 4.608 1.688 4.608 4.156 0 1.682-.554 2.769-1.416 2.769-.492 0-.772-.28-.772-.76V5.206H8.923v.834h-.11c-.266-.595-.881-.964-1.6-.964-1.4 0-2.378 1.162-2.378 2.823 0 1.737.957 2.906 2.379 2.906.8 0 1.415-.39 1.709-1.087h.11c.081.67.703 1.148 1.503 1.148 1.572 0 2.57-1.415 2.57-3.643zm-7.177.704c0-1.197.54-1.907 1.456-1.907.93 0 1.524.738 1.524 1.907S8.308 9.84 7.371 9.84c-.895 0-1.442-.725-1.442-1.914z"/>
+                          </svg>
+                        </span>
+                        <input type="email" class="form-control" name="email" id="email" placeholder="email@email.com" value="<?php  echo $row['email']?>">
+                      </div>
                         <input type="submit" class="btn btn-primary" value="Actualizar"> 
                     </form>
                     <?php
                         }
                     ?>
                 </div>
-                <div class="col-2"></div>
+                <div class="col-4"></div>
             </div> 
             
             <div class="row">
@@ -131,7 +143,7 @@
                     <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
                         <div class="col-md-4 d-flex align-items-center">
                         <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
-                            <img src="img/icono_kirusushi.png" width="30px" height="29px" alt="">
+                            <img src="../img/icono_kirusushi.png" width="30px" height="29px" alt="">
                         </a>
                         <span class="text-muted">© 2021 Jose Jorquera</span>
                         </div>

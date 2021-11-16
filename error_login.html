@@ -15,18 +15,18 @@
             <div class="col-12">
               <nav class="navbar navbar-expand-lg bg-translucent">
                 <div class="container-fluid">
-                  <a class="navbar-brand link-dark" href="#"><img src="img/icono_kirusushi.png" width="30px" height="29px" alt="icono negocio"> Kiru Sushi</a>
+                  <a class="navbar-brand link-dark" href="/"><img src="img/icono_kirusushi.png" width="30px" height="29px" alt="icono negocio"> Kiru Sushi</a>
                   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                   </button>
                   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                      <a class="nav-link link-dark" aria-current="page" href="index.html">Inicio</a>
+                      <!--<a class="nav-link link-dark" aria-current="page" href="inicio.html">Inicio</a>
                       <a class="nav-link link-dark" href="nosotros.html">Nosotros</a>
                       <a class="nav-link link-dark" href="login.html">Login</a>
-                      <a class="nav-link link-dark" href="https://drive.google.com/file/d/1IklU-lD9451JQJii3HnqoXgI6VkaNKMZ/view" target="_blank">Carta</a>
                       <a class="nav-link link-dark" href="form_ext.html">Haz tu Pedido!</a>
                       <a class="nav-link link-dark" href="php/registro.php">Ver Registrados</a>
+                      <a class="nav-link link-dark" href="https://drive.google.com/file/d/1IklU-lD9451JQJii3HnqoXgI6VkaNKMZ/view" target="_blank">Carta</a>--> 
                     </div>
                   </div>
                 </div>
@@ -40,48 +40,28 @@
             </div>
         </div>
 
-        <div class="row section d-flex align-items-center justify-content-center">
-            <div class="col-3"></div>
-            <div class="col-6 border">
-                <div class="form-signin">
-                    <div class="col-12 p-2 align-items-center text-center">
-                    <form>
-                        
-                            <img class="mb-4" src="img/icono_kirusushi.png" alt="" width="52" height="51">
-                            <h1 class="h5 mb-3 fw-normal">Ingrese por favor</h1>
-                        
-
-                            <div class="form-floating mb-4">
-                                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                                <label for="floatingInput">Email</label>
-                            </div>
-                            <div class="form-floating">
-                                <input type="password" class="form-control" id="floatingPassword" placeholder="Contraseña">
-                                <label for="floatingPassword">Contraseña</label>
-                            </div>
-                        
-                            <div class="checkbox mb-3">
-                                <label>
-                                <input type="checkbox" value="remember-me"> Recuerdame
-                                </label>
-                            </div>
-                        
-                            <button class="mb-4 btn btn-lg btn-primary" type="submit">
-                                Ingresar
-                            </button>
-                            <a href="form_registro.html">
-                                <button class="mb-4 btn btn-lg btn-secondary" type="button">
-                                    Registrar
-                                </button>
-                            </a>
+        <div class="row section">
+          <div class="col-3"></div>
+          <div class="col-6 p-4">
+            <div class="form-signin">
+              <div class="row">
+                <div class="col-2"></div>
+                <div class="col-8">
+                    <div class="card shadow-lg p-3 mb-5 bg-body rounded" style="width: 20rem;">
+                        <div class="card-body">
+                        <h6 class="card-subtitle text-center mb-2">Las credenciales ingresadas no son validas.</h6>
+                        <p class="card-text text-center text-muted">Elija una opcion:</p>
+                          <a href="php/recuperar.php" class="card-link">Cambiar contraseña</a>
+                          <a href="index.html" class="card-link">Volver a intentar</a>
                         </div>
-                        
-                    </form>
+                    </div>
                 </div>
+                <div class="col-2"></div>
+                </div>
+              </div>
             </div>
-            <div class="col-3"></div>
-        </div>
-
+          </div>
+          <div class="col-3"></div>
         <div class="row">
             <div class="col-12">
                 <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
